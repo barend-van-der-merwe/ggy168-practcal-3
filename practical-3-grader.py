@@ -18,8 +18,7 @@ INSTRUCTIONS
 
 st.subheader("Select the grades files")
 gc = st.file_uploader("Select the grades CSV file", type = "csv")
-global df
-df = pd.read_csv(gc)
+
 
 st.subheader("Select Student Submission")
 image = st.file_uploader("Select the student submission", type = ["png", "jpg"])
@@ -61,6 +60,9 @@ if image is not None:
     snumber_from_filename = re.sub("-", '', snumber_from_filename[0])
     st.write(f'Student number: {snumber_from_filename}')
 
+    global df
+    df = pd.read_csv(gc)
+    
     row_index = df.index[df["Username"] == snumber_from_filename].tolist()
     surname = df.iloc[row_index, 0].values[0]
     first = df.iloc[row_index, 1].values[0]
